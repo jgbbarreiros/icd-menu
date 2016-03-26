@@ -1,10 +1,11 @@
-package Menu;
+package restaurant;
 
 import java.io.File;
 import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -17,18 +18,19 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 
-public class DocManager {
+public class FileManager {
 	
 	private DocumentBuilder documentBuilder = null;
 	private Document document = null;
 	private Transformer transformer = null;
 	private String currentDocName = null;
 	
-	public DocManager() {
+	public FileManager() {
 		
 		try {
 			documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		} catch (javax.xml.parsers.ParserConfigurationException e) {
 			System.err.println(e.getMessage());
 		} catch (TransformerConfigurationException e) {
@@ -38,7 +40,7 @@ public class DocManager {
 		}
 	}
 	
-	public Document blankDocument() {
+	public Document blank() {
 		document = documentBuilder.newDocument();
 		return this.document;
 	}
